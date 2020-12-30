@@ -16,6 +16,8 @@ copy the `example_config.json` and name it `config.json`.
 
 Insert the private token of your bot and the user id of the person you want to monitor.
 
+to run the bot, type `npm run start`
+
 ## Usage
 
 perform a GET Request to http://localhost:9999/cam-status
