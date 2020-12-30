@@ -15,3 +15,7 @@ A simple tool/bot to monitore the status of somebodys webcam.
 copy the `example_config.json` and name it `config.json`.
 
 Insert the private token of your bot and the user id of the person you want to monitor.
+
+## Usage
+
+perform a GET Request to http://localhost:9999/cam-status
