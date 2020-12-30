@@ -1,0 +1,6 @@
+{
+    "token": "YourPrivateToken",
+    "prefix": "}}",
+    "monitored_user": "The discord ID of the monitored user",
+	"express_port": "9999"
+}
