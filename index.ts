@@ -6,14 +6,12 @@ export const config = JSON.parse(fs.readFileSync("./configs/config.json", "utf8"
 
 var cam_active = false
 
-
 const app = express()
 
 app.get("/cam-status", (req, res) => {
-	if (cam_active)
-		res.send(`1 The cam of the user with the ID ${config.monitored_user} is currently active.`)
-	else 
-		res.send(`0 The cam of the user with the ID ${config.monitored_user} is currently not active.`)
+	res.send(`${cam_active? "1" : "0"}`
+	       + ` The cam of the user with the ID ${config.monitored_user} is`
+	       + ` currently ${cam_active? "" : "in"}active.`)
 })
 
 app.listen(config.express_port, () => {
@@ -21,32 +19,7 @@ app.listen(config.express_port, () => {
 })
 
 
-
 var client = new Discord.Client();
-
-client.on("ready", () => {
-    console.log("[Discord.js] Logged in as " + client.user?.username + "...");
-	check_for_webcam()
-});
-
-
-client.on("message", (msg) => {
-    if (!msg.guild) return;
-    if (msg.member?.id == client.user?.id) return;
-
-    var cont = msg.content;
-    var author = msg.member;
-
-    try {
-        if (author?.id != null && client.user?.id != null) {
-            if (author.id != client.user.id && cont.startsWith(config.prefix)) {
-
-            }
-        }
-    } catch (err) {
-        console.log(err, msg);
-    }
-});
 
 function check_for_webcam() {
 	var guilds = client.guilds.cache.array()
@@ -66,5 +39,10 @@ function check_for_webcam() {
 	cam_active = false
 	setTimeout(check_for_webcam, 3000)
 }
+
+client.on("ready", () => {
+    console.log("[Discord.js] Logged in as " + client.user?.username + "...");
+	check_for_webcam()
+})
 
 client.login(config.token);
