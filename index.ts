@@ -11,7 +11,7 @@ const app = express()
 app.get("/cam-status", (req, res) => {
 	res.send(`${cam_active? "1" : "0"}`
 	       + ` The cam of the user with the ID ${config.monitored_user} is`
-		   + ` currently ${cam_active? "" : "in"}active.`)
+	       + ` currently ${cam_active? "" : "in"}active.`)
 })
 
 app.listen(config.express_port, () => {
